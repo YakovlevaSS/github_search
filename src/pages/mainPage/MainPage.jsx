@@ -1,5 +1,6 @@
+import Search from "../../components/search/Search"
 function MainPage() {
-  return <p className="">Main</p>
+  return (<Search/>)
 }
 
 export default MainPage
