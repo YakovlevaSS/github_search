@@ -7,6 +7,10 @@ export const Item = styled.li`
   width: 100%;
   height: 80px;
   font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.24px;
   color: #696969;
   display: grid;
   grid-template-columns: 150px auto 200px auto 200px;
