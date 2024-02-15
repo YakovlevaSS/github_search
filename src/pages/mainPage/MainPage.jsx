@@ -2,6 +2,8 @@ import * as S from './styles'
 
 import Search from '../../components/search/Search'
 import UserList from '../../components/userList/userList'
+import Loader from '../../components/loader/loader'
+import EmptySearch from '../../components/emptySearch/EmptySearch'
 
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -21,14 +23,23 @@ function MainPage() {
     page,
   })
 
-dispatch(setUsers(data))
+  dispatch(setUsers(data))
 
-  console.log(data);
+  console.log(data)
+
+  if (error) { 
+      return (
+        <S.ErrorWrap>
+          <S.ErrorText>Что-то пошло не так,</S.ErrorText>
+          <S.ErrorText>попробуйте повторить запрос позже!</S.ErrorText>
+        </S.ErrorWrap>
+      );
+  }
 
   return (
     <S.Wrap>
       <Search setUserLogin={setUserLogin} />
-      <UserList users={data}/>
+      {isLoading ? <Loader /> : data.length === 0 ? <EmptySearch/> : <UserList users={data} />}
     </S.Wrap>
   )
 }

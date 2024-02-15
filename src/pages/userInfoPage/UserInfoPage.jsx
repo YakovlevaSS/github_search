@@ -1,8 +1,6 @@
 import * as S from './styles'
 import { useParams } from 'react-router'
-import { date } from '../../components/utitits/mock'
 import { useSelector } from 'react-redux'
-import { userSelector } from '../../store/selectors/users'
 
 function UserInfoPage() {
   const {users} = useSelector((state) => state.users)
