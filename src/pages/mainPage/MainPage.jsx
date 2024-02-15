@@ -9,7 +9,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { useGetUsersQuery } from '../../store/Api/usersApi'
-import { setUsers } from '../../store/slices/usersSlice'
+import { setUsers, setTotalUsers } from '../../store/slices/usersSlice'
 
 function MainPage() {
   const [userLogin, setUserLogin] = useState('')
@@ -24,6 +24,7 @@ function MainPage() {
   })
 if (userLogin) {
   dispatch(setUsers(data.items))
+  dispatch(setTotalUsers(data.total_count))
 } else {
   dispatch(setUsers(data))
 }
@@ -42,7 +43,7 @@ if (userLogin) {
 
   return (
     <S.Wrap>
-      <Search setUserLogin={setUserLogin} isLoading={isLoading}/>
+      <Search setUserLogin={setUserLogin}/>
       {isLoading ? <Loader /> : users?.length === 0 ? <EmptySearch/> : <UserList/>}
     </S.Wrap>
   )
