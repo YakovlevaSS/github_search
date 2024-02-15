@@ -38,7 +38,7 @@ function MainPage() {
 
   return (
     <S.Wrap>
-      <Search setUserLogin={setUserLogin} />
+      <Search setUserLogin={setUserLogin} isLoading={isLoading}/>
       {isLoading ? <Loader /> : data.length === 0 ? <EmptySearch/> : <UserList users={data} />}
     </S.Wrap>
   )
