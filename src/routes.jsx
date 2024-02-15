@@ -8,7 +8,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />
-      <Route path="/userinfo/:id" element={<UserInfoPage />} />
+      <Route path="/userinfo/:login" element={<UserInfoPage />} />
       <Route path="*" element={<NotFoundPage />} /> 
     </Routes>
   );

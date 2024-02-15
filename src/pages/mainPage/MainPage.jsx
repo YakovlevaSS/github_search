@@ -23,12 +23,12 @@ function MainPage() {
     page,
   })
   useEffect(() => {
-    if (userLogin) {
-      dispatch(setUsers(data.items));
-      dispatch(setTotalUsers(data.total_count));
-    } else {
-      dispatch(setUsers(data));
-    }
+    // if (userLogin) {
+      dispatch(setUsers(data?.items));
+      dispatch(setTotalUsers(data?.total_count));
+    // } else {
+    //   dispatch(setUsers(data));
+    // }
   }, [userLogin, data, dispatch]);
 
 

@@ -18,7 +18,7 @@ export const Card = styled.div`
   background-color: #ffffff;
   padding: 40px;
   width: 100%;
-  height: 400px;
+  height: 600px;
   display: flex;
   gap: 40px;
   align-items: center;
@@ -61,16 +61,35 @@ letter-spacing: 0.24px;
 color: #000000;
 `
 export const TextBig = styled.p`
-font-size: 24px;
+font-size: 22px;
 font-style: normal;
 font-weight: 400;
 line-height: 24px;
 letter-spacing: 0.24px;
 color: #000000;
-margin-bottom: 20px;
+margin-bottom: 10px;
 `
 export const TextLable = styled.p`
 font-size: 14px;
 line-height: 20px; /* 142.857% */
 color: #808080
+`
+export const ErrorWrap = styled.div`
+padding: 20px;
+background-color: #DCDCDC;
+display: flex;
+gap: 20px;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+`
+
+export const ErrorText = styled.p`
+font-size: 24px;
+font-style: normal;
+font-weight: 400;
+line-height: 20px;
+letter-spacing: 0.24px;
+color: #FF0000;
+text-align: center;
 `

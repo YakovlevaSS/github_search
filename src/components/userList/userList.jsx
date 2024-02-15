@@ -10,7 +10,7 @@ const UserList = () => {
   return (
     <S.List>
       {users?.map((user) => (
-        <NavLink to={`/userinfo/${user.id}`} key={user.id}>
+        <NavLink to={`/userinfo/${user.login}`} key={user.id}>
           <UserItem user={user} />
         </NavLink>
       ))}

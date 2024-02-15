@@ -3,7 +3,7 @@ import * as S from './styles'
 function Loader() {
   return (
     <S.Wrap>
-      <S.Text>Ищем...</S.Text>
+      <S.Text>Загружаем информацию...</S.Text>
     </S.Wrap>
   )
 }
