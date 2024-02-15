@@ -5,7 +5,7 @@ import UserList from '../../components/userList/userList'
 import Loader from '../../components/loader/loader'
 import EmptySearch from '../../components/emptySearch/EmptySearch'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { useGetUsersQuery } from '../../store/Api/usersApi'
@@ -22,12 +22,14 @@ function MainPage() {
     order,
     page,
   })
-if (userLogin) {
-  dispatch(setUsers(data.items))
-  dispatch(setTotalUsers(data.total_count))
-} else {
-  dispatch(setUsers(data))
-}
+  useEffect(() => {
+    if (userLogin) {
+      dispatch(setUsers(data.items));
+      dispatch(setTotalUsers(data.total_count));
+    } else {
+      dispatch(setUsers(data));
+    }
+  }, [userLogin, data, dispatch]);
 
 
   if (error) { 
