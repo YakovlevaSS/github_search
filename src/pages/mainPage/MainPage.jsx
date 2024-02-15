@@ -6,7 +6,7 @@ import Loader from '../../components/loader/loader'
 import EmptySearch from '../../components/emptySearch/EmptySearch'
 
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { useGetUsersQuery } from '../../store/Api/usersApi'
 import { setUsers } from '../../store/slices/usersSlice'
@@ -22,10 +22,12 @@ function MainPage() {
     order,
     page,
   })
-
+if (userLogin) {
+  dispatch(setUsers(data.items))
+} else {
   dispatch(setUsers(data))
+}
 
-  console.log(data)
 
   if (error) { 
       return (
@@ -36,10 +38,12 @@ function MainPage() {
       );
   }
 
+  const {users} = useSelector((state) => state.users)
+
   return (
     <S.Wrap>
       <Search setUserLogin={setUserLogin} isLoading={isLoading}/>
-      {isLoading ? <Loader /> : data.length === 0 ? <EmptySearch/> : <UserList users={data} />}
+      {isLoading ? <Loader /> : users?.length === 0 ? <EmptySearch/> : <UserList/>}
     </S.Wrap>
   )
 }

@@ -11,7 +11,7 @@ export const usersApi = createApi({
       query: ({ userLogin, order, page }) => {
         if (userLogin) {
           return {
-            url: `search/users?q=${userLogin}&sort=repositories&order=${order}&per_page=10&page=${page}`,
+            url: `search/users?q=${userLogin}&sort=repositories&order=${order}&per_page=12&page=${page}`,
             // method: "GET",
             // headers: {
             //   "Content-type": "application/json",

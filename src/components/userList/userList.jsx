@@ -1,9 +1,11 @@
 import * as S from './styles'
 import { NavLink } from 'react-router-dom'
 import UserItem from '../userItem/UserItem'
-import { date } from '../utitits/mock'
+import { useSelector } from 'react-redux'
 
-const UserList = ({users}) => {
+
+const UserList = () => {
+  const {users} = useSelector((state) => state.users)
 
   return (
     <S.List>
