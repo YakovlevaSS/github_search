@@ -3,8 +3,7 @@ import { NavLink } from 'react-router-dom'
 import UserItem from '../userItem/UserItem'
 import { date } from '../utitits/mock'
 
-const UserList = () => {
-  const users = date
+const UserList = ({users}) => {
 
   return (
     <S.List>
