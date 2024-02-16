@@ -24,29 +24,37 @@ function MainPage() {
     order,
     page,
   })
-  useEffect(() => {
-      dispatch(setUsers(data?.items));
-      dispatch(setTotalUsers(data?.total_count));
-  }, [userLogin, data, page, dispatch]);
-
-
-  if (error) { 
-      return (
-        <S.ErrorWrap>
-          <S.ErrorText>Что-то пошло не так,</S.ErrorText>
-          <S.ErrorText>попробуйте повторить запрос позже!</S.ErrorText>
-        </S.ErrorWrap>
-      );
+  if (error) {
+    return (
+      <S.ErrorWrap>
+        <S.ErrorText>Что-то пошло не так,</S.ErrorText>
+        <S.ErrorText>попробуйте повторить запрос позже!</S.ErrorText>
+      </S.ErrorWrap>
+    )
   }
 
-  const {users} = useSelector((state) => state.users)
+  dispatch(setUsers(data?.items))
+  dispatch(setTotalUsers(data?.total_count))
+  const users = data?.items
+
+//   useEffect(() => {
+//     dispatch(setUsers(data?.items));
+//     dispatch(setTotalUsers(data?.total_count));
+// }, [userLogin, data, page, dispatch]);
+// const {users} = useSelector((state) => state.users)
 
   return (
     <S.Wrap>
-      <Search setUserLogin={setUserLogin}/>
-      <SortComponent setOrder={setOrder}/>
-      {isLoading ? <Loader /> : users?.length === 0 ? <EmptySearch/> : (<UserList/>)}
-      <PaginationComp page={page} setPage={setPage}/>
+      <Search setUserLogin={setUserLogin} />
+      <SortComponent setOrder={setOrder} />
+      {isLoading ? (
+        <Loader />
+      ) : users?.length === 0 ? (
+        <EmptySearch />
+      ) : (
+        <UserList />
+      )}
+      <PaginationComp page={page} setPage={setPage} />
     </S.Wrap>
   )
 }
