@@ -2,6 +2,7 @@ import * as S from './styles'
 
 import Search from '../../components/search/Search'
 import UserList from '../../components/userList/userList'
+import SortComponent from '../../components/sortComp/SortComponent'
 import Loader from '../../components/loader/loader'
 import EmptySearch from '../../components/emptySearch/EmptySearch'
 
@@ -46,6 +47,7 @@ function MainPage() {
   return (
     <S.Wrap>
       <Search setUserLogin={setUserLogin}/>
+      <SortComponent setOrder={setOrder}/>
       {isLoading ? <Loader /> : users?.length === 0 ? <EmptySearch/> : <UserList/>}
     </S.Wrap>
   )
