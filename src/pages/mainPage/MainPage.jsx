@@ -37,6 +37,12 @@ function MainPage() {
   dispatch(setTotalUsers(data?.total_count))
   const users = data?.items
 
+//   useEffect(() => {
+//     dispatch(setUsers(data?.items));
+//     dispatch(setTotalUsers(data?.total_count));
+// }, [userLogin, data, page, dispatch]);
+// const {users} = useSelector((state) => state.users)
+
   return (
     <S.Wrap>
       <Search setUserLogin={setUserLogin} />
