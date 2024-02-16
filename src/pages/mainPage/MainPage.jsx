@@ -2,6 +2,7 @@ import * as S from './styles'
 
 import Search from '../../components/search/Search'
 import UserList from '../../components/userList/userList'
+import PaginationComp from '../../components/pagination/PaginatonComp'
 import SortComponent from '../../components/sortComp/SortComponent'
 import Loader from '../../components/loader/loader'
 import EmptySearch from '../../components/emptySearch/EmptySearch'
@@ -24,13 +25,9 @@ function MainPage() {
     page,
   })
   useEffect(() => {
-    // if (userLogin) {
       dispatch(setUsers(data?.items));
       dispatch(setTotalUsers(data?.total_count));
-    // } else {
-    //   dispatch(setUsers(data));
-    // }
-  }, [userLogin, data, dispatch]);
+  }, [userLogin, data, page, dispatch]);
 
 
   if (error) { 
@@ -48,7 +45,8 @@ function MainPage() {
     <S.Wrap>
       <Search setUserLogin={setUserLogin}/>
       <SortComponent setOrder={setOrder}/>
-      {isLoading ? <Loader /> : users?.length === 0 ? <EmptySearch/> : <UserList/>}
+      {isLoading ? <Loader /> : users?.length === 0 ? <EmptySearch/> : (<UserList/>)}
+      <PaginationComp page={page} setPage={setPage}/>
     </S.Wrap>
   )
 }
