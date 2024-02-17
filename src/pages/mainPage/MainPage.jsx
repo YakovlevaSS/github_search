@@ -20,7 +20,7 @@ function MainPage() {
   const [userLogin, setUserLogin] = useState('')
   const [order, setOrder] = useState('')
   const [page, setPage] = useState(1)
-  const [users, setUsersList] = useState(1)
+  const [usersList, setUsersList] = useState(1)
   const dispatch = useDispatch()
 
   // const { data, error, isLoading } = useGetUsersQuery({
@@ -51,7 +51,7 @@ function MainPage() {
    
       dispatch(setUsers(data?.items))
       dispatch(setTotalUsers(data?.total_count))
-      setUsers(data?.items)
+      setUsersList(data?.items)
     } catch (error) {
       setTextError(error.message)
     }
@@ -81,7 +81,7 @@ function MainPage() {
       <SortComponent setOrder={setOrder} />
       {isLoading ? (
         <Loader />
-      ) : users?.length === 0 ? (
+      ) : usersList?.length === 0 ? (
         <EmptySearch />
       ) : (
         <UserList />
