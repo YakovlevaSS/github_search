@@ -1,6 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
-import usersReducer from "./slices/usersSlice";
-import { usersApi } from "./Api/usersApi";
+import { configureStore } from '@reduxjs/toolkit'
+import usersReducer from './slices/usersSlice'
+import { usersApi } from './Api/usersApi'
 
 export const store = configureStore({
   reducer: {
@@ -9,7 +9,5 @@ export const store = configureStore({
   },
 
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(
-      usersApi.middleware
-    ),
-});
+    getDefaultMiddleware().concat(usersApi.middleware),
+})

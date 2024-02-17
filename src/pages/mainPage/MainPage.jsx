@@ -18,7 +18,7 @@ import { setUsers, setTotalUsers } from '../../store/slices/usersSlice'
 
 function MainPage() {
   const [userLogin, setUserLogin] = useState('')
-  const [order, setOrder] = useState('')
+  const [order, setOrder] = useState('desc')
   const [page, setPage] = useState(1)
   const [usersList, setUsersList] = useState(1)
   const dispatch = useDispatch()
@@ -41,29 +41,31 @@ function MainPage() {
 
   const [getUsers, { isLoading, isError, data }] = useLazyGetUsersQuery()
   const [textError, setTextError] = useState('')
+
   const fetchDataUsers = async () => {
     try {
-      await getUsers({
+      const response = await getUsers({
         userLogin,
         order,
         page,
-      })
-   
-      dispatch(setUsers(data?.items))
-      dispatch(setTotalUsers(data?.total_count))
-      setUsersList(data?.items)
+      });
+  
+      const responseData = response.data;
+  
+      if (responseData) {
+        dispatch(setUsers(responseData.items));
+        dispatch(setTotalUsers(responseData.total_count));
+        setUsersList(responseData.items);
+      }
     } catch (error) {
-      setTextError(error.message)
+      setTextError(error.message);
     }
-  }
-
+  };
   useEffect(() => {
       fetchDataUsers()
   }, [userLogin, page, order])
 
-  useEffect(() => {
-    fetchDataUsers()
-}, [])
+
 
   if (isError) {
     return (
