@@ -2,9 +2,9 @@ import * as S from './styles'
 
 function Loader() {
   return (
-    <S.LoaderContainer>
-      <S.LoaderCircle />
-    </S.LoaderContainer>
+    <S.Wrap>
+    <S.Text>Загружаем информацию...</S.Text>
+      </S.Wrap>
   )
 }
 
