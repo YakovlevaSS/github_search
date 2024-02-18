@@ -19,9 +19,9 @@
 
 ## Установка и запуск проекта:
 1. Проверьте, установлен у вас Node.js, если нет, то установите согласно инструкции на сайте https://nodejs.org/en
-2. Клонируйте репозиторий: git clone git@github.com:YakovlevaSS/github_search.git
+2. Клонируйте репозиторий: git clone <URL репозитория>
 3. Перейдите в директорию клонированного проекта: cd github_search
-4. Установить заисимости: npm install
+4. Установите заисимости: npm install
 5. Создайте файл .env.local и запишите туда personal access tokens, полученный на GitHub, пример записи в файле .env.local.example. Если вы не получали token, то получите в соответствии с инструкцией в документации GitHub https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
 6. Запустите приложение: npm run start.
 Приложение будет запущено на http://localhost:3000.
