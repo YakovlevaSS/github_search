@@ -1,6 +1,5 @@
 import * as S from './styles'
 import { useSelector } from 'react-redux'
-import { useState } from 'react'
 import Pagination from 'react-js-pagination'
 
 const PaginationComp = ({ page, setPage }) => {

@@ -8,10 +8,9 @@ import Loader from '../../components/loader/loader'
 import EmptySearch from '../../components/emptySearch/EmptySearch'
 
 import { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch} from 'react-redux'
 
 import {
-  useGetUsersQuery,
   useLazyGetUsersQuery,
 } from '../../store/Api/usersApi'
 import { setUsers, setTotalUsers } from '../../store/slices/usersSlice'
@@ -39,7 +38,7 @@ function MainPage() {
   // }, [userLogin, data, page, dispatch])
   // const { users } = useSelector((state) => state.users)
 
-  const [getUsers, { isLoading, isError, data }] = useLazyGetUsersQuery()
+  const [getUsers, { isLoading, isError}] = useLazyGetUsersQuery()
   const [textError, setTextError] = useState('')
 
   const fetchDataUsers = async () => {

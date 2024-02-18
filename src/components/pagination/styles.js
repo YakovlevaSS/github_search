@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Pagination from 'react-js-pagination'
 
 export const Container = styled.div`
   display: flex;
