@@ -3,12 +3,18 @@ import { useSelector } from 'react-redux'
 import Pagination from 'react-js-pagination'
 
 const PaginationComp = ({ page, setPage }) => {
+
   const handlePageChange = (pageNumber) => {
     setPage(pageNumber)
   }
 
   const { totalUsers } = useSelector((state) => state.users)
-  const totalUsersNumber = parseInt(totalUsers, 10)
+ let totalUsersNumber = parseInt(totalUsers, 10)
+
+   // Проверка и установка максимального значения 1000 поскольку апи гитхаба возвращает максимум 1000 значений и при переходе на последнюю страницу в пагинации может возникать ошибка
+   if (totalUsersNumber > 1000) {
+    totalUsersNumber = 1000;
+  }
 
   return (
     <S.Container>

@@ -8,40 +8,73 @@ import Loader from '../../components/loader/loader'
 import EmptySearch from '../../components/emptySearch/EmptySearch'
 
 import { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch} from 'react-redux'
 
-import { useGetUsersQuery } from '../../store/Api/usersApi'
+import {
+  useLazyGetUsersQuery,
+} from '../../store/Api/usersApi'
 import { setUsers, setTotalUsers } from '../../store/slices/usersSlice'
 
 function MainPage() {
   const [userLogin, setUserLogin] = useState('')
-  const [order, setOrder] = useState('')
+  const [order, setOrder] = useState('desc')
   const [page, setPage] = useState(1)
+  const [usersList, setUsersList] = useState(1)
   const dispatch = useDispatch()
 
-  const { data, error, isLoading } = useGetUsersQuery({
-    userLogin,
-    order,
-    page,
-  })
-  if (error) {
+  // const { data, error, isLoading } = useGetUsersQuery({
+  //   userLogin,
+  //   order,
+  //   page,
+  // })
+
+  // dispatch(setUsers(data?.items))
+  // dispatch(setTotalUsers(data?.total_count))
+  // const users = data?.items
+
+  // useEffect(() => {
+  //   dispatch(setUsers(data?.items))
+  //   dispatch(setTotalUsers(data?.total_count))
+  // }, [userLogin, data, page, dispatch])
+  // const { users } = useSelector((state) => state.users)
+
+  const [getUsers, { isLoading, isError}] = useLazyGetUsersQuery()
+  const [textError, setTextError] = useState('')
+
+  const fetchDataUsers = async () => {
+    try {
+      const response = await getUsers({
+        userLogin,
+        order,
+        page,
+      });
+  
+      const responseData = response.data;
+  
+      if (responseData) {
+        dispatch(setUsers(responseData.items));
+        dispatch(setTotalUsers(responseData.total_count));
+        setUsersList(responseData.items);
+      }
+    } catch (error) {
+      setTextError(error.message);
+    }
+  };
+  useEffect(() => {
+      fetchDataUsers()
+  }, [userLogin, page, order])
+
+
+
+  if (isError) {
     return (
       <S.ErrorWrap>
         <S.ErrorText>Что-то пошло не так,</S.ErrorText>
         <S.ErrorText>попробуйте повторить запрос позже!</S.ErrorText>
+        <S.ErrorText>{textError}</S.ErrorText>
       </S.ErrorWrap>
     )
   }
-
-  dispatch(setUsers(data?.items))
-  dispatch(setTotalUsers(data?.total_count))
-  const users = data?.items
-
-//   useEffect(() => {
-//     dispatch(setUsers(data?.items));
-//     dispatch(setTotalUsers(data?.total_count));
-// }, [userLogin, data, page, dispatch]);
-// const {users} = useSelector((state) => state.users)
 
   return (
     <S.Wrap>
@@ -49,7 +82,7 @@ function MainPage() {
       <SortComponent setOrder={setOrder} />
       {isLoading ? (
         <Loader />
-      ) : users?.length === 0 ? (
+      ) : usersList?.length === 0 ? (
         <EmptySearch />
       ) : (
         <UserList />
