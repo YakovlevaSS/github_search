@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { usersReducer } from '../../store/slices/usersSlice';
-import UserList from './UserList';
+import UserList from './userList';
 
 describe("Test for UserList component", () => {
   test('renders UserList component correctly', () => {
