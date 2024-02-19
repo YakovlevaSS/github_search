@@ -37,20 +37,8 @@ export const usersApi = createApi({
       },
       providesTags: ['USERS'],
     }),
-    getUserRepo: builder.query({
-      query: ({ login }) => {
-        return {
-          url: `users/${login}/repos`,
-        }
-      },
-      providesTags: ['USERS'],
-    }),
   }),
 })
 
-export const {
-  useGetUsersQuery,
-  useLazyGetUsersQuery,
-  useGetUserInfoQuery,
-  useGetUserRepoQuery,
-} = usersApi
+export const { useGetUsersQuery, useLazyGetUsersQuery, useGetUserInfoQuery } =
+  usersApi
