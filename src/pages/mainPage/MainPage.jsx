@@ -13,10 +13,7 @@ import { useDispatch } from 'react-redux'
 import { useLazyGetUsersQuery } from '../../store/Api/usersApi'
 import { setUsers, setTotalUsers } from '../../store/slices/usersSlice'
 
-function MainPage({userLogin, setUserLogin}) {
-  // const [userLogin, setUserLogin] = useState('')
-  const [order, setOrder] = useState('desc')
-  const [page, setPage] = useState(1)
+function MainPage({ userLogin, setUserLogin, order, setOrder, page, setPage }) {
   const [usersList, setUsersList] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const dispatch = useDispatch()
@@ -70,7 +67,7 @@ function MainPage({userLogin, setUserLogin}) {
 
   return (
     <S.Wrap>
-      <Search setUserLogin={setUserLogin} userLogin={userLogin}/>
+      <Search setUserLogin={setUserLogin} userLogin={userLogin} />
       <SortComponent setOrder={setOrder} />
       {isLoading ? (
         <Loader />
