@@ -13,18 +13,20 @@ import { useDispatch } from 'react-redux'
 import { useLazyGetUsersQuery } from '../../store/Api/usersApi'
 import { setUsers, setTotalUsers } from '../../store/slices/usersSlice'
 
-function MainPage() {
-  const [userLogin, setUserLogin] = useState('')
+function MainPage({userLogin, setUserLogin}) {
+  // const [userLogin, setUserLogin] = useState('')
   const [order, setOrder] = useState('desc')
   const [page, setPage] = useState(1)
-  const [usersList, setUsersList] = useState(1)
+  const [usersList, setUsersList] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
   const dispatch = useDispatch()
 
-  const [getUsers, { isLoading, isError }] = useLazyGetUsersQuery()
+  const [getUsers, { isError }] = useLazyGetUsersQuery()
   const [textError, setTextError] = useState('')
 
   const fetchDataUsers = async () => {
     try {
+      setIsLoading(true)
       const response = await getUsers({
         userLogin,
         order,
@@ -40,10 +42,20 @@ function MainPage() {
       }
     } catch (error) {
       setTextError(error.message)
+    } finally {
+      setIsLoading(false)
     }
   }
+
+  //вызов функции при изменении параметров
   useEffect(() => {
-    fetchDataUsers()
+    if (userLogin) {
+      fetchDataUsers()
+    }
+    // Очищаем массив юзеров при очищении инпута поиска
+    dispatch(setUsers([]))
+    dispatch(setTotalUsers([]))
+    setUsersList([])
   }, [userLogin, page, order])
 
   if (isError) {
@@ -58,16 +70,18 @@ function MainPage() {
 
   return (
     <S.Wrap>
-      <Search setUserLogin={setUserLogin} />
+      <Search setUserLogin={setUserLogin} userLogin={userLogin}/>
       <SortComponent setOrder={setOrder} />
       {isLoading ? (
         <Loader />
-      ) : usersList?.length === 0 ? (
+      ) : usersList?.length === 0 && userLogin !== '' ? (
         <EmptySearch />
       ) : (
         <UserList />
       )}
-      <PaginationComp page={page} setPage={setPage} />
+      {usersList?.length !== 0 && (
+        <PaginationComp page={page} setPage={setPage} />
+      )}
     </S.Wrap>
   )
 }
