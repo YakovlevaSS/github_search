@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   users: [],
   totalUsers: '',
+  userLogin: ''
 }
 
 const usersSlice = createSlice({
@@ -11,14 +12,16 @@ const usersSlice = createSlice({
   reducers: {
     setUsers(state, action) {
       state.users = action.payload
-      localStorage.setItem('users', state.users)
     },
     setTotalUsers(state, action) {
       state.totalUsers = action.payload
     },
+    setUserLogin(state, action) {
+      state.userLogin = action.payload
+    },
   },
 })
 
-export const { setUsers, setTotalUsers } = usersSlice.actions
+export const { setUsers, setTotalUsers,setUserLogin } = usersSlice.actions
 export default usersSlice.reducer
 export const usersReducer = usersSlice.reducer

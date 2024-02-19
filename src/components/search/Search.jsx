@@ -1,6 +1,10 @@
 import * as S from './styles'
+import { useSelector, useDispatch } from 'react-redux'
+import { setUserLogin } from '../../store/slices/usersSlice'
 
-const Search = ({ setUserLogin, userLogin}) => {
+const Search = () => {
+  const dispatch = useDispatch()
+  const { userLogin } = useSelector((state) => state.users)
   return (
     <S.SearchContainer>
       <S.Input
@@ -8,7 +12,7 @@ const Search = ({ setUserLogin, userLogin}) => {
         placeholder="Введите ваш запрос..."
         value={userLogin}
         onChange={(event) => {
-          setUserLogin(event.target.value)
+          dispatch(setUserLogin(event.target.value))
         }}
       />
     </S.SearchContainer>

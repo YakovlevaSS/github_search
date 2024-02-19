@@ -8,18 +8,20 @@ import Loader from '../../components/loader/loader'
 import EmptySearch from '../../components/emptySearch/EmptySearch'
 
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { useLazyGetUsersQuery } from '../../store/Api/usersApi'
-import { setUsers, setTotalUsers } from '../../store/slices/usersSlice'
+import { setUsers, setTotalUsers} from '../../store/slices/usersSlice'
 
-function MainPage({ userLogin, setUserLogin, order, setOrder, page, setPage }) {
+function MainPage({ order, setOrder, page, setPage }) {
   const [usersList, setUsersList] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const [textError, setTextError] = useState('')
+
   const dispatch = useDispatch()
 
+  const { userLogin } = useSelector((state) => state.users)
   const [getUsers, { isError }] = useLazyGetUsersQuery()
-  const [textError, setTextError] = useState('')
 
   const fetchDataUsers = async () => {
     try {
@@ -48,11 +50,15 @@ function MainPage({ userLogin, setUserLogin, order, setOrder, page, setPage }) {
   useEffect(() => {
     if (userLogin) {
       fetchDataUsers()
-    }
+    } else {
     // Очищаем массив юзеров при очищении инпута поиска
+    //ставим остальные параметраы в дефолтное состояие
     dispatch(setUsers([]))
     dispatch(setTotalUsers([]))
     setUsersList([])
+    setOrder('desc')
+    setPage(1)
+    }
   }, [userLogin, page, order])
 
   if (isError) {
@@ -67,7 +73,7 @@ function MainPage({ userLogin, setUserLogin, order, setOrder, page, setPage }) {
 
   return (
     <S.Wrap>
-      <Search setUserLogin={setUserLogin} userLogin={userLogin} />
+      <Search />
       <SortComponent setOrder={setOrder} />
       {isLoading ? (
         <Loader />
