@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { useLazyGetUsersQuery } from '../../store/Api/usersApi'
-import { setUsers, setTotalUsers} from '../../store/slices/usersSlice'
+import { setUsers, setTotalUsers } from '../../store/slices/usersSlice'
 
 function MainPage({ order, setOrder, page, setPage }) {
   const [usersList, setUsersList] = useState([])
@@ -51,13 +51,13 @@ function MainPage({ order, setOrder, page, setPage }) {
     if (userLogin) {
       fetchDataUsers()
     } else {
-    // Очищаем массив юзеров при очищении инпута поиска
-    //ставим остальные параметраы в дефолтное состояие
-    dispatch(setUsers([]))
-    dispatch(setTotalUsers([]))
-    setUsersList([])
-    setOrder('desc')
-    setPage(1)
+      // Очищаем массив юзеров при очищении инпута поиска
+      //ставим остальные параметраы в дефолтное состояие
+      dispatch(setUsers([]))
+      dispatch(setTotalUsers([]))
+      setUsersList([])
+      setOrder('desc')
+      setPage(1)
     }
   }, [userLogin, page, order])
 
