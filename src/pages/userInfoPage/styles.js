@@ -11,13 +11,20 @@ export const Wrap = styled.div`
   align-items: center;
   justify-content: center;
 `
-
 export const Card = styled.div`
   border-radius: 20px;
   background-color: #ffffff;
   padding: 40px;
   width: 100%;
-  height: 600px;
+  height: 500px;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  flex-direction: column;
+`
+
+export const Content = styled.div`
+  width: 100%;
   display: flex;
   gap: 40px;
   align-items: center;

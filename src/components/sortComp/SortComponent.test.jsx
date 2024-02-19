@@ -1,25 +1,28 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import SortComponent from './SortComponent'
 
-describe('Test for SortComponent', () => {
-  test('displays correct text based on sort state', () => {
+describe('SortComponent', () => {
+  test('calls setOrder with correct arguments on button click', () => {
     const setOrderMock = jest.fn()
     render(<SortComponent setOrder={setOrderMock} />)
-    const buttonEl = screen.getByText(/Фильтровать по/) // Получаем элемент кнопки по тексту
 
-    // Проверяем, что изначально отображается текст для убывающего порядка
-    expect(buttonEl).toHaveTextContent(
-      'Фильтровать по убыванию числа репозиториев',
+    // Получаем ссылку на первую кнопку ("Фильтровать по возрастанию числа репозиториев")
+    const ascButton = screen.getByText(
+      /Фильтровать по возрастанию числа репозиториев/,
     )
+    fireEvent.click(ascButton)
 
-    fireEvent.click(buttonEl)
-
-    // Проверяем, что теперь отображается текст для возрастающего порядка
-    expect(buttonEl).toHaveTextContent(
-      'Фильтровать по возрастанию числа репозиториев',
-    )
-
-    // Проверяем, что mock-функция setOrder была вызвана с ожидаемым значением при изменении состояния sort
+    // Проверяем, что mock-функция setOrder была вызвана с ожидаемым значением
     expect(setOrderMock).toHaveBeenCalledWith('asc')
+
+    // Получаем ссылку на вторую кнопку ("Фильтровать по убыванию числа репозиториев")
+    const descButton = screen.getByText(
+      /Фильтровать по убыванию числа репозиториев/,
+    )
+
+    fireEvent.click(descButton)
+
+    // Проверяем, что mock-функция setOrder была вызвана с ожидаемым значением
+    expect(setOrderMock).toHaveBeenCalledWith('desc')
   })
 })

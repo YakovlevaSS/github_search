@@ -1,6 +1,7 @@
 import * as S from './styles'
 import { useParams } from 'react-router'
 import { useGetUserInfoQuery } from '../../store/Api/usersApi'
+import BackButton from '../../components/backButton/BackButton'
 import DateFormatter from '../../components/utitits/dateFormater'
 import Loader from '../../components/loader/loader'
 
@@ -24,34 +25,37 @@ function UserInfoPage() {
   return (
     <S.Wrap>
       <S.Card>
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <>
-            <S.Avatar>
-              <S.Img alt="avatar" src={data?.avatar_url} />
-            </S.Avatar>
-            <S.Info>
-              <S.TextBig>Подробная информация о пользователе</S.TextBig>
-              <S.InfoBlog>
-                <S.TextLable>Логин</S.TextLable>
-                <S.Text>{data?.login}</S.Text>
-              </S.InfoBlog>
-              <S.InfoBlog>
-                <S.TextLable>Описание профиля</S.TextLable>
-                <S.Text>{data?.bio}</S.Text>
-              </S.InfoBlog>
-              <S.InfoBlog>
-                <S.TextLable>Дата создания профиля</S.TextLable>
-                <S.Text>{formatedCreatedDate}</S.Text>
-              </S.InfoBlog>
-              <S.InfoBlog>
-                <S.TextLable>Колличество публичных репозиториев</S.TextLable>
-                <S.Text>{data?.public_repos}</S.Text>
-              </S.InfoBlog>
-            </S.Info>
-          </>
-        )}
+        <BackButton />
+        <S.Content>
+          {isLoading ? (
+            <Loader />
+          ) : (
+            <>
+              <S.Avatar>
+                <S.Img alt="avatar" src={data?.avatar_url} />
+              </S.Avatar>
+              <S.Info>
+                <S.TextBig>Подробная информация о пользователе</S.TextBig>
+                <S.InfoBlog>
+                  <S.TextLable>Логин</S.TextLable>
+                  <S.Text>{data?.login}</S.Text>
+                </S.InfoBlog>
+                <S.InfoBlog>
+                  <S.TextLable>Описание профиля</S.TextLable>
+                  <S.Text>{data?.bio}</S.Text>
+                </S.InfoBlog>
+                <S.InfoBlog>
+                  <S.TextLable>Дата создания профиля</S.TextLable>
+                  <S.Text>{formatedCreatedDate}</S.Text>
+                </S.InfoBlog>
+                <S.InfoBlog>
+                  <S.TextLable>Колличество публичных репозиториев</S.TextLable>
+                  <S.Text>{data?.public_repos}</S.Text>
+                </S.InfoBlog>
+              </S.Info>
+            </>
+          )}
+        </S.Content>
       </S.Card>
     </S.Wrap>
   )
