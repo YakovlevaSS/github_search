@@ -1,14 +1,14 @@
-import './App.css';
-import AppRoutes from "./routes";
+import './App.css'
+import AppRoutes from './routes'
 import GlobalStyle from './global'
 
 function App() {
   return (
     <>
       <GlobalStyle />
-        <AppRoutes />
+      <AppRoutes />
     </>
-  );
+  )
 }
 
-export default App;
+export default App

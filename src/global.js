@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
 body {
@@ -60,4 +60,4 @@ ul li {
   }
 
   `
-  export default GlobalStyle;
+export default GlobalStyle

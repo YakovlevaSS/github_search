@@ -1,8 +1,6 @@
 import * as S from './styles'
 
-const Search = ({ setUserLogin  }) => {
-
-
+const Search = ({ setUserLogin }) => {
   return (
     <S.SearchContainer>
       <S.Input

@@ -10,18 +10,17 @@ function UserInfoPage() {
   const { data, error, isLoading } = useGetUserInfoQuery({
     login,
   })
-  const createdDate = DateFormatter(data?.created_at)
+  const formatedCreatedDate = DateFormatter(data?.created_at)
 
-  if (error) { 
+  if (error) {
     return (
       <S.ErrorWrap>
         <S.ErrorText>Что-то пошло не так,</S.ErrorText>
         <S.ErrorText>попробуйте повторить запрос позже!</S.ErrorText>
       </S.ErrorWrap>
-    );
-}
+    )
+  }
 
-  console.log(data)
   return (
     <S.Wrap>
       <S.Card>
@@ -44,7 +43,7 @@ function UserInfoPage() {
               </S.InfoBlog>
               <S.InfoBlog>
                 <S.TextLable>Дата создания профиля</S.TextLable>
-                <S.Text>{createdDate}</S.Text>
+                <S.Text>{formatedCreatedDate}</S.Text>
               </S.InfoBlog>
               <S.InfoBlog>
                 <S.TextLable>Колличество публичных репозиториев</S.TextLable>

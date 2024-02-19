@@ -8,11 +8,9 @@ import Loader from '../../components/loader/loader'
 import EmptySearch from '../../components/emptySearch/EmptySearch'
 
 import { useState, useEffect } from 'react'
-import { useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 
-import {
-  useLazyGetUsersQuery,
-} from '../../store/Api/usersApi'
+import { useLazyGetUsersQuery } from '../../store/Api/usersApi'
 import { setUsers, setTotalUsers } from '../../store/slices/usersSlice'
 
 function MainPage() {
@@ -22,23 +20,7 @@ function MainPage() {
   const [usersList, setUsersList] = useState(1)
   const dispatch = useDispatch()
 
-  // const { data, error, isLoading } = useGetUsersQuery({
-  //   userLogin,
-  //   order,
-  //   page,
-  // })
-
-  // dispatch(setUsers(data?.items))
-  // dispatch(setTotalUsers(data?.total_count))
-  // const users = data?.items
-
-  // useEffect(() => {
-  //   dispatch(setUsers(data?.items))
-  //   dispatch(setTotalUsers(data?.total_count))
-  // }, [userLogin, data, page, dispatch])
-  // const { users } = useSelector((state) => state.users)
-
-  const [getUsers, { isLoading, isError}] = useLazyGetUsersQuery()
+  const [getUsers, { isLoading, isError }] = useLazyGetUsersQuery()
   const [textError, setTextError] = useState('')
 
   const fetchDataUsers = async () => {
@@ -47,24 +29,22 @@ function MainPage() {
         userLogin,
         order,
         page,
-      });
-  
-      const responseData = response.data;
-  
+      })
+
+      const responseData = response.data
+
       if (responseData) {
-        dispatch(setUsers(responseData.items));
-        dispatch(setTotalUsers(responseData.total_count));
-        setUsersList(responseData.items);
+        dispatch(setUsers(responseData.items))
+        dispatch(setTotalUsers(responseData.total_count))
+        setUsersList(responseData.items)
       }
     } catch (error) {
-      setTextError(error.message);
+      setTextError(error.message)
     }
-  };
+  }
   useEffect(() => {
-      fetchDataUsers()
+    fetchDataUsers()
   }, [userLogin, page, order])
-
-
 
   if (isError) {
     return (

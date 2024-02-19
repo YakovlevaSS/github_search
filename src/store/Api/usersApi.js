@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
-const token = process.env.REACT_APP_API_TOKEN;
+const token = process.env.REACT_APP_API_TOKEN
 
 export const usersApi = createApi({
   reducerPath: 'usersApi',
@@ -48,5 +48,9 @@ export const usersApi = createApi({
   }),
 })
 
-export const { useGetUsersQuery, useLazyGetUsersQuery , useGetUserInfoQuery, useGetUserRepoQuery } =
-  usersApi
+export const {
+  useGetUsersQuery,
+  useLazyGetUsersQuery,
+  useGetUserInfoQuery,
+  useGetUserRepoQuery,
+} = usersApi
